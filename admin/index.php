@@ -1,9 +1,16 @@
 <?php
 
-if($_POST) {
-  header('Location:inicio.php');
-}
+session_start();
 
+if($_POST) {
+  if(($_POST['usuario'] == "amdress") && ($_POST['contrasenia'] == "admin")) {
+    $_SESSION['usuario'] = "ok";
+    $_SESSION['nombreUsuario'] = "amdress";
+    header('Location:inicio.php');
+  } else {
+    $mensaje = "Error: El usuario o contrasenia son incorrectos.";
+  }
+}
 ?>
 
 
@@ -35,6 +42,13 @@ if($_POST) {
             </div>
             <div class="card-body">
 
+            <!-- MENSAJE -->
+            <?php if(isset($mensaje)) { ?>
+              <div class="alert aert-danger" role="alert">
+                <?php echo $mensaje; ?>
+              </div>
+            <?php } ?>
+
               <form method="post">
               
               <div class = "form-group">
@@ -42,10 +56,10 @@ if($_POST) {
               <input type="text" class="form-control" name="usuario" aria-describedby="emailHelp" placeholder="Nombre de Usuario">
               </div>
 
-              <div class="form-group">
+              < class="form-group">
               <label for="exampleInputPassword1">Contraseña</label>
               <input type="password" class="form-control" name="contrasenia" placeholder="Contraseña">
-              </div>
+              </
 
               <button type="submit" class="btn btn-primary">Entrar al Administrador</button>
               </form>
